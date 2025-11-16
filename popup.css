@@ -1,0 +1,388 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+  background-color: #f5f5f5;
+  width: 400px;
+  min-height: 300px;
+}
+
+.container {
+  padding: 20px;
+  position: relative;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+h1 {
+  font-size: 24px;
+  color: #333;
+  margin: 0;
+  flex: 1;
+  text-align: center;
+}
+
+.hamburger-btn {
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  width: 30px;
+  height: 30px;
+  justify-content: center;
+  align-items: center;
+  border-radius: 4px;
+  transition: background-color 0.3s;
+}
+
+.hamburger-btn:hover {
+  background-color: rgba(255, 107, 0, 0.1);
+}
+
+.hamburger-btn span {
+  width: 20px;
+  height: 2px;
+  background-color: #333;
+  display: block;
+  transition: all 0.3s;
+}
+
+.hamburger-menu {
+  position: absolute;
+  top: 60px;
+  right: 20px;
+  background: white;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+  z-index: 1000;
+  min-width: 200px;
+  overflow: hidden;
+}
+
+.menu-item {
+  width: 100%;
+  padding: 12px 15px;
+  border: none;
+  background: white;
+  text-align: left;
+  cursor: pointer;
+  font-size: 14px;
+  color: #333;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: background-color 0.2s;
+}
+
+.menu-item:hover {
+  background-color: #f5f5f5;
+}
+
+.menu-item:not(:last-child) {
+  border-bottom: 1px solid #eee;
+}
+
+.menu-icon svg{
+  font-size: 16px;
+  width: 16px;
+  height: 16px;
+}
+
+h2 {
+  font-size: 18px;
+  color: #555;
+  margin-bottom: 15px;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+  font-weight: 500;
+  color: #333;
+}
+
+input[type="url"],
+input[type="text"],
+input[type="password"] {
+  width: 100%;
+  padding: 10px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+input:focus {
+  outline: none;
+  border-color: #ff6b00;
+}
+
+small {
+  display: block;
+  margin-top: 5px;
+  color: #666;
+  font-size: 12px;
+}
+
+.btn {
+  padding: 10px 15px;
+  border: none;
+  border-radius: 4px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+  width: 100%;
+  margin-top: 10px;
+}
+
+.btn-primary {
+  background-color: #ff6b00;
+  color: white;
+}
+
+.btn-primary:hover {
+  background-color: #e55d00;
+}
+
+.btn-secondary {
+  background-color: #6c757d;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background-color: #5a6268;
+}
+
+.hidden {
+  display: none;
+}
+
+#status-message {
+  margin-top: 15px;
+  padding: 10px;
+  border-radius: 4px;
+  font-size: 14px;
+}
+
+#status-message.success {
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+}
+
+#status-message.error {
+  background-color: #f8d7da;
+  color: #721c24;
+  border: 1px solid #f5c6cb;
+}
+
+.task-item {
+  background: white;
+  padding: 15px;
+  margin-bottom: 10px;
+  border-radius: 4px;
+  border-left: 4px solid #ff6b00;
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.task-title {
+  font-weight: 600;
+  color: #333;
+  margin-bottom: 5px;
+}
+
+.task-course {
+  color: #666;
+  font-size: 13px;
+  margin-bottom: 5px;
+}
+
+.task-due {
+  color: #ff6b00;
+  font-size: 12px;
+  margin-bottom: 10px;
+}
+
+.task-actions {
+  display: flex;
+  gap: 5px;
+}
+
+.task-actions button {
+  flex: 1;
+  padding: 8px;
+  font-size: 12px;
+  margin-top: 0;
+}
+
+.btn-open {
+  background-color: #28a745;
+  color: white;
+}
+
+.btn-open:hover {
+  background-color: #218838;
+}
+
+.btn-snooze {
+  background-color: #ffc107;
+  color: #333;
+}
+
+.btn-snooze:hover {
+  background-color: #e0a800;
+}
+
+.btn-dismiss {
+  background-color: #dc3545;
+  color: white;
+}
+
+.btn-dismiss:hover {
+  background-color: #c82333;
+}
+
+.no-tasks {
+  text-align: center;
+  padding: 20px;
+  color: #666;
+}
+
+.btn-snooze:disabled {
+  background-color: #ddd;
+  color: #888;
+  cursor: not-allowed;
+}
+
+.btn-snooze:disabled:hover {
+  background-color: #ddd;
+}
+
+.snooze-time {
+  font-size: 10px;
+  color: #666;
+  margin-top: 3px;
+  display: block;
+}
+
+.btn-unmark {
+  background-color: #17a2b8;
+  color: white;
+}
+
+.btn-unmark:hover {
+  background-color: #138496;
+}
+
+.task-item.dismissed {
+  opacity: 0.6;
+  border-left-color: #6c757d;
+}
+
+/* Estilos para el banner de actualización */
+.update-banner {
+  background: linear-gradient(135deg, #ff6b00 0%, #ff8533 100%);
+  color: white;
+  padding: 15px;
+  margin: -20px -20px 20px -20px;
+  box-shadow: 0 2px 8px rgba(255, 107, 0, 0.3);
+  animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+  from {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.update-content {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  position: relative;
+}
+
+.update-icon svg{
+  font-size: 24px;
+  flex-shrink: 0;
+  width: 24px;
+  height: 24px;
+}
+
+.update-text {
+  flex: 1;
+}
+
+.update-text strong {
+  display: block;
+  font-size: 16px;
+  margin-bottom: 3px;
+}
+
+.update-text p {
+  margin: 0;
+  font-size: 13px;
+  opacity: 0.9;
+}
+
+.btn-update {
+  background: white;
+  color: #ff6b00;
+  padding: 8px 16px;
+  border-radius: 4px;
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 13px;
+  transition: all 0.3s;
+  white-space: nowrap;
+  box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+}
+
+.btn-update:hover {
+  background: #f5f5f5;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+}
+
+.update-dismiss {
+  position: absolute;
+  top: -5px;
+  right: -5px;
+  background: rgba(255, 255, 255, 0.2);
+  border: none;
+  color: white;
+  width: 24px;
+  height: 24px;
+  border-radius: 50%;
+  cursor: pointer;
+  font-size: 16px;
+  line-height: 1;
+  transition: background 0.2s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.update-dismiss:hover {
+  background: rgba(255, 255, 255, 0.3);
+}

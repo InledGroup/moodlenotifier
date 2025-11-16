@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Moodle Notifier - Que no se te olvide</title>
+  <link rel="stylesheet" href="popup.css">
+</head>
+<body>
+  <div class="container">
+    <div class="header">
+      <h1>Moodle Notifier</h1>
+      <button id="hamburger-btn" class="hamburger-btn">
+        <span></span>
+        <span></span>
+        <span></span>
+      </button>
+    </div>
+
+    <div id="hamburger-menu" class="hamburger-menu hidden">
+      <button id="menu-refresh-btn" class="menu-item">
+        <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 48 48"><path fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="4" d="M42 8v16M6 24v16m36-16c0-9.941-8.059-18-18-18a17.95 17.95 0 0 0-12.952 5.5M6 24c0 9.941 8.059 18 18 18a17.94 17.94 0 0 0 12.5-5.048"/></svg></span>
+        Actualizar Tareas
+      </button>
+      <button id="menu-all-tasks-btn" class="menu-item">
+        <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 24 24"><path fill="currentColor" d="M19.995 4.097A2.25 2.25 0 0 0 17.75 2H6.25l-.154.005A2.25 2.25 0 0 0 4 4.251v15.498l.005.154A2.25 2.25 0 0 0 6.25 22h7.568l-1.5-1.5H6.25l-.102-.007a.75.75 0 0 1-.648-.743V4.251l.007-.102a.75.75 0 0 1 .743-.648h11.5l.102.007a.75.75 0 0 1 .648.743v11.567l1.159-1.159q.16-.16.34-.28V4.25zm-3.707 17.902h-.076a.75.75 0 0 1-.493-.219l-2.5-2.502a.75.75 0 0 1 1.062-1.06l1.969 1.971l4.47-4.47a.75.75 0 1 1 1.06 1.061l-5 5a.75.75 0 0 1-.492.219M13.84 16.5a2 2 0 0 0-.182 0h-2.413a.75.75 0 0 1 0-1.5h5.004a.75.75 0 1 1 0 1.5zM9 7.752a1 1 0 1 1-2 0a1 1 0 0 1 2 0m1.496-.002a.75.75 0 0 1 .75-.75h5.004a.75.75 0 1 1 0 1.5h-5.004a.75.75 0 0 1-.75-.75m.75 3.25a.75.75 0 0 0 0 1.5h5.004a.75.75 0 1 0 0-1.5zM8 12.75a1 1 0 1 0 0-2a1 1 0 0 0 0 2m1 2.998a1 1 0 1 1-2 0a1 1 0 0 1 2 0"/></svg></span>
+        Ver Todas las Tareas
+      </button>
+      <button id="menu-config-btn" class="menu-item">
+        <span class="menu-icon"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linejoin="round" stroke-width="4"><path d="m24 4l-6 6h-8v8l-6 6l6 6v8h8l6 6l6-6h8v-8l6-6l-6-6v-8h-8z"/><path d="M24 30a6 6 0 1 0 0-12a6 6 0 0 0 0 12Z"/></g></svg></span>
+        Cambiar Configuración
+      </button>
+    </div>
+
+    <!-- Aviso de actualización -->
+    <div id="update-banner" class="update-banner hidden">
+      <div class="update-content">
+        <span class="update-icon"><svg xmlns="http://www.w3.org/2000/svg" width="128" height="128" viewBox="0 0 48 48"><g fill="none" stroke="currentColor" stroke-linecap="round" stroke-width="4"><path stroke-linejoin="round" d="M44 8H4v30h15l5 5l5-5h15z"/><path d="M24 23v9m0-16v1"/></g></svg></span>
+        <div class="update-text">
+          <strong>¡Actualización disponible!</strong>
+          <p>La extensión necesita actualizarse</p>
+        </div>
+        <a id="update-download-btn" href="#" target="_blank" class="btn-update">
+          Descargar Actualización
+        </a>
+        <button id="update-dismiss-btn" class="update-dismiss" title="Cerrar">✕</button>
+      </div>
+    </div>
+
+    <div id="config-section">
+      <h2>Configuración</h2>
+      <form id="config-form">
+        <div class="form-group">
+          <label for="moodle-url">URL de Moodle:</label>
+          <input type="url" id="moodle-url" placeholder="https://moodle.example.com" required>
+          <small>Ejemplo: https://moodle.example.com (sin / al final)</small>
+        </div>
+
+        <div class="form-group">
+          <label for="username">Usuario:</label>
+          <input type="text" id="username" placeholder="Tu usuario de Moodle" required>
+        </div>
+
+        <div class="form-group">
+          <label for="password">Contraseña:</label>
+          <input type="password" id="password" placeholder="Tu contraseña" required>
+        </div>
+
+        <button type="submit" class="btn btn-primary">Guardar Configuración</button>
+      </form>
+
+      <div id="status-message" class="hidden"></div>
+    </div>
+
+    <div id="tasks-section" class="hidden">
+      <h2>Tareas Pendientes</h2>
+      <div id="tasks-list"></div>
+    </div>
+
+    <div id="all-tasks-section" class="hidden">
+      <h2>Todas las Tareas</h2>
+      <div id="all-tasks-list"></div>
+      <button id="back-to-pending-btn" class="btn btn-secondary">Volver a Pendientes</button>
+    </div>
+  </div>
+
+  <audio id="notification-sound" src="sound.mp3" preload="auto"></audio>
+
+  <script src="popup.js"></script>
+</body>
+</html>
