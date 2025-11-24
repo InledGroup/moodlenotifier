@@ -2,8 +2,8 @@
 
 // Configuración de la extensión
 const EXTENSION_CONFIG = {
-  id: 'moodle-notifier-v1',
-  version: '1.0.0',
+  id: 'moodle-notifier-v1.2',
+  version: '1.2.0',
   updateApiUrl: 'https://extupdater.inled.es/api/updates.json',
   updateCheckInterval: 24 * 60 // Verificar cada 24 horas (en minutos)
 };
