@@ -96,7 +96,7 @@ async function checkAndNotifyTasks() {
   }
 
   const tasks = await getTasks();
-  const { dismissedTasks = [], snoozedTasks = {} } = await chrome.storage.local.get(['dismissedTasks', 'snoozedTasks']);
+  const { dismissedTasks = [], snoozedTasks = {}, lastNotifiedTaskIds = [] } = await chrome.storage.local.get(['dismissedTasks', 'snoozedTasks', 'lastNotifiedTaskIds']);
 
   const now = Date.now();
   const dismissedSet = new Set(dismissedTasks);
@@ -108,9 +108,21 @@ async function checkAndNotifyTasks() {
     return true;
   });
 
-  // Si hay tareas pendientes, abrir el popup y reproducir sonido
-  if (tasksToNotify.length > 0) {
+  // Identificar si hay tareas nuevas que no estaban en la última notificación
+  const currentTaskIds = tasksToNotify.map(t => t.id);
+  const newTasks = tasksToNotify.filter(t => !lastNotifiedTaskIds.includes(t.id));
+
+  // Actualizar la lista de tareas notificadas para la próxima vez
+  // Guardamos TODAS las tareas pendientes actuales, no solo las nuevas
+  await chrome.storage.local.set({ lastNotifiedTaskIds: currentTaskIds });
+
+  // Si hay tareas NUEVAS, abrir el popup y reproducir sonido
+  // Si ya se notificó sobre estas tareas, no hacer nada (silencio)
+  if (newTasks.length > 0) {
+    console.log('Nuevas tareas detectadas:', newTasks.length);
     openPopupWithSound();
+  } else {
+    console.log('No hay tareas nuevas para notificar');
   }
 }
 
