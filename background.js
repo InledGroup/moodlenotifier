@@ -96,6 +96,14 @@ async function checkAndNotifyTasks() {
   }
 
   const tasks = await getTasks();
+
+  // Si hubo un error al obtener tareas (null), no hacemos nada para evitar falsos positivos
+  // o limpiar el estado incorrectamente.
+  if (tasks === null) {
+    console.log('Error al obtener tareas, saltando verificación');
+    return;
+  }
+
   const { dismissedTasks = [], snoozedTasks = {}, lastNotifiedTaskIds = [] } = await chrome.storage.local.get(['dismissedTasks', 'snoozedTasks', 'lastNotifiedTaskIds']);
 
   const now = Date.now();
@@ -220,7 +228,8 @@ async function getTasks() {
       console.error('Error con endpoint alternativo:', error2);
     }
 
-    return [];
+    // Retornar null para indicar error y evitar limpiar el estado de notificaciones
+    return null;
   }
 }
 
