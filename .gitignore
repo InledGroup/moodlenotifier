@@ -1,0 +1,12 @@
+# Chrome Extension specific
+*.pem
+*.crx
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Misc
+node_modules/
+dist/
+.env
